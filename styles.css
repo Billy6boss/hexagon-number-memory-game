@@ -1,3 +1,33 @@
+.game-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.game-left {
+    flex: 1;
+}
+
+.target-display {
+    width: 200px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    position: absolute;
+    right: 15px;
+    top: 170px;
+}
+
+.target-number {
+    font-size: 64px;
+    font-weight: bold;
+    color: #007bff;
+    margin-top: 10px;
+}
+
 .game-board {
     display: grid;
     position: relative;
@@ -69,5 +99,90 @@
 .timer-display {
     font-size: 48px;
     font-weight: bold;
+}
+
+/* Team Score Panel Styles */
+.team-score-panel {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 250px;
+    background-color: #f8f9fa;
+    border-right: 1px solid #dee2e6;
+    padding: 20px 15px;
+    overflow-y: auto;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.team-panel-header {
+    margin-bottom: 20px;
+    border-bottom: 2px solid #dee2e6;
+    padding-bottom: 15px;
+}
+
+.team-input-container {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.team-item {
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.team-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.team-name {
+    font-weight: bold;
+}
+
+.remove-btn {
+    font-size: 16px;
+    padding: 0px 6px;
+    line-height: 1;
+}
+
+.team-score {
+    font-size: 24px;
+    text-align: center;
+    margin: 5px 0;
+}
+
+.score-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+/* Adjust main content to make room for the team panel */
+.container, .target-display {
+    margin-left: 250px;
+}
+
+@media (max-width: 768px) {
+    .team-score-panel {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 1px solid #dee2e6;
+    }
+    
+    .container, .target-display {
+        margin-left: 0;
+    }
+}
     color: #007bff;
 }
