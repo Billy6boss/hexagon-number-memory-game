@@ -1,0 +1,73 @@
+.game-board {
+    display: grid;
+    position: relative;
+    width: 600px;
+    height: 600px;
+    margin: 50px auto;
+    padding: 0;
+}
+
+.hexagon {
+    position: absolute;
+    width: 100px;
+    height: 115.47px;
+    background-color: #007bff;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+.hexagon:hover {
+    transform: scale(1.1);
+    background-color: #0056b3;
+    z-index: 1;
+}
+
+.hexagon span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Hexagon positioning with 2px gaps - organized pattern */
+/* Row height = 88.6px (86.6px + 2px gap) */
+/* Horizontal spacing = 102px (100px + 2px gap) */
+
+/* First row - ABC */
+#hex-A { top: 2px; left: 152px; }     /* Left */
+#hex-B { top: 2px; left: 254px; }     /* Center */
+#hex-C { top: 2px; left: 356px; }     /* Right */
+
+/* Second row - DEFG */
+#hex-D { top: 88.6px; left: 101px; }  /* Far Left */
+#hex-E { top: 88.6px; left: 203px; }  /* Left */
+#hex-F { top: 88.6px; left: 305px; }  /* Right */
+#hex-G { top: 88.6px; left: 407px; }  /* Far Right */
+
+/* Third row - HIJKL */
+#hex-H { top: 175.2px; left: 50px; }  /* Far Left */
+#hex-I { top: 175.2px; left: 152px; } /* Left */
+#hex-J { top: 175.2px; left: 254px; } /* Center */
+#hex-K { top: 175.2px; left: 356px; } /* Right */
+#hex-L { top: 175.2px; left: 458px; } /* Far Right */
+
+/* Fourth row - MNOP */
+#hex-M { top: 261.8px; left: 101px; } /* Far Left */
+#hex-N { top: 261.8px; left: 203px; } /* Left */
+#hex-O { top: 261.8px; left: 305px; } /* Right */
+#hex-P { top: 261.8px; left: 407px; } /* Far Right */
+
+/* Fifth row - QRS */
+#hex-Q { top: 348.4px; left: 152px; } /* Left */
+#hex-R { top: 348.4px; left: 254px; } /* Center */
+#hex-S { top: 348.4px; left: 356px; } /* Right */
+
+.timer-display {
+    font-size: 48px;
+    font-weight: bold;
+    color: #007bff;
+}
