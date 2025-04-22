@@ -150,6 +150,8 @@ class HexagonGame {
         }, CONFIG.SELECTION_RESET_DELAY);
     }
       resetSelection() {
+        // log the selected numbers before resetting
+        console.log('Resetting selection:', this.selectedNumbers.map(item => item.number));
         this.selectedNumbers.forEach(item => {
             item.hexagon.classList.remove('selected');
             item.hexagon.style.backgroundColor = CONFIG.COLORS.DEFAULT;

@@ -2,6 +2,9 @@
 
 一個需要記憶數字並找出加總組合的益智遊戲。
 
+## 立刻遊玩!!
+[Hexagon Number Memory Game](https://billy6boss.github.io/hexagon-number-memory-game/)
+
 ## 遊戲玩法
 
 1. **開始遊戲**

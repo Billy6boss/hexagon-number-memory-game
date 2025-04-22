@@ -2,6 +2,9 @@
 
 A memory game where you need to remember numbers and find combinations that add up to a target sum.
 
+## Play it Now On Github Page!!
+[Hexagon Number Memory Game](https://billy6boss.github.io/hexagon-number-memory-game/)
+
 ## How to Play
 
 1. **Start the Game**

@@ -6,7 +6,7 @@ const CONFIG = {
     INITIAL_TIME: 10,
     TOTAL_HEXAGONS: 19,
     MAX_NUMBER: 5,
-    SELECTION_RESET_DELAY: 2000, // 2 seconds
+    SELECTION_RESET_DELAY: 1250,
     
     // Colors
     COLORS: {
