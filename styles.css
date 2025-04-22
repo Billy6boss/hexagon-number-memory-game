@@ -184,5 +184,59 @@
         margin-left: 0;
     }
 }
-    color: #007bff;
+
+/* Dark Theme for Hard Mode */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.dark-mode .container h1,
+body.dark-mode .team-panel-header h3,
+body.dark-mode .target-display h3 {
+    color: #e0e0e0;
+}
+
+body.dark-mode .target-display {
+    background-color: #252525;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .target-number {
+    color: #64b5f6; /* Lighter blue for dark mode */
+}
+
+body.dark-mode .hexagon {
+    background-color: #455a64; /* Darker blue for hexagons in dark mode */
+}
+
+body.dark-mode .hexagon:hover {
+    background-color: #607d8b; /* Slightly lighter on hover */
+}
+
+body.dark-mode .team-score-panel {
+    background-color: #252525;
+    border-color: #454545;
+}
+
+body.dark-mode .team-item {
+    background-color: #303030;
+    border-color: #454545;
+}
+
+/* Connected hexagons in hard mode */
+.hexagon.connected-path {
+    border: 2px solid #ffc107;
+    box-shadow: 0 0 10px #ffc107;
+}
+
+/* Hard mode activated button */
+#hardModeBtn.active {
+    background-color: #7d0000;
+    border-color: #7d0000;
+}
+
+body.dark-mode #hardModeBtn.active {
+    background-color: #ff5252;
+    border-color: #ff5252;
 }

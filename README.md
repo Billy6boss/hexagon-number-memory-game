@@ -30,6 +30,21 @@ A memory game where you need to remember numbers and find combinations that add 
 5. **Reset Game**
    - Click the "Reset Game" button to start over with new random numbers
 
+## Hard Mode
+
+Toggle the "Hard Mode" button to activate a more challenging version of the game:
+
+1. **Dark Theme**
+   - The game interface switches to a dark color scheme
+
+2. **Number Distribution**
+   - Each number (1-5) appears no more than 3 times on the board
+   - This creates a more balanced distribution of numbers
+
+3. **Connected Selection Rule**
+   - The three selected hexagons must form a straight line (vertical, horizontal, or diagonal)
+   - If the sum is correct but the hexagons don't form a line, the selection is invalid
+
 ## Layout
 
 The game board consists of 19 hexagons arranged in 5 rows:
@@ -46,5 +61,6 @@ The game board consists of 19 hexagons arranged in 5 rows:
 - Try to memorize groups of numbers that add up to common sums
 - Pay attention to the positions of larger numbers
 - Use the letter labels to help remember where specific numbers were located
+- In hard mode, look for aligned hexagons that might form valid combinations
 
 [查看繁體中文版本](README_zh_TW.md)

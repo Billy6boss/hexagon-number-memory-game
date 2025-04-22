@@ -7,6 +7,7 @@ class HexagonGame {
         this.timerDisplay = document.getElementById('timer');
         this.startBtn = document.getElementById('startBtn');
         this.resetBtn = document.getElementById('resetBtn');
+        this.hardModeBtn = document.getElementById('hardModeBtn');
         this.targetNumberDisplay = document.getElementById('targetNumber');
         
         // Game state
@@ -16,6 +17,7 @@ class HexagonGame {
         this.targetNumber = 0;
         this.selectedNumbers = [];
         this.usedCombinations = new Set();
+        this.hardModeEnabled = false;
         
         // Managers
         this.boardManager = new BoardManager();
@@ -24,6 +26,7 @@ class HexagonGame {
         // Event listeners
         this.startBtn.addEventListener('click', () => this.startGame());
         this.resetBtn.addEventListener('click', () => this.resetGame());
+        this.hardModeBtn.addEventListener('click', () => this.toggleHardMode());
         
         // Initialize game
         this.initializeGame();
@@ -32,6 +35,25 @@ class HexagonGame {
     initializeGame() {
         this.boardManager.createBoard();
         this.boardManager.setHexagonClickHandler((hexagon, number) => this.handleHexagonClick(hexagon, number));
+    }
+    
+    toggleHardMode() {
+        this.hardModeEnabled = !this.hardModeEnabled;
+        this.hardModeBtn.textContent = this.hardModeEnabled ? 'Hard Mode: ON' : 'Hard Mode: OFF';
+        
+        // Toggle the active class for styling
+        this.hardModeBtn.classList.toggle('active', this.hardModeEnabled);
+        
+        // Toggle dark theme on body
+        document.body.classList.toggle('dark-mode', this.hardModeEnabled);
+        
+        // Update the board manager
+        this.boardManager.setHardMode(this.hardModeEnabled);
+        
+        // Reset the game to apply hard mode settings
+        if (this.gameStarted) {
+            this.resetGame();
+        }
     }
     
     startGame() {
@@ -60,8 +82,8 @@ class HexagonGame {
     
     handleTimeUp() {
         clearInterval(this.timer);
-        // Generate random target number
-        this.targetNumber = Math.floor(Math.random() * 8) + 5; // Random number between 5 and 12
+        // Generate random target number from 6 to 12
+        this.targetNumber = Math.floor(Math.random() * 7) + 6; // Random number between 6 and 12
         this.targetNumberDisplay.textContent = this.targetNumber;
         this.timerDisplay.textContent = 'Time\'s up!';
         this.selectedNumbers = [];
@@ -121,13 +143,28 @@ class HexagonGame {
     }
     
     checkSelection() {
+        // log the selected numbers for debugging
+        console.log('Selected Numbers:', this.selectedNumbers.map(item => item.number).sort().join(','));
+
         const selectedIds = this.selectedNumbers.map(item => item.hexagon.id).sort().join(',');
         const sum = this.selectedNumbers.reduce((acc, curr) => acc + curr.number, 0);
         
-        if (sum === this.targetNumber && !this.usedCombinations.has(selectedIds)) {
+        // Get just the hexagon elements for connectivity check
+        const selectedHexagons = this.selectedNumbers.map(item => item.hexagon);
+        
+        // Check if selected hexagons form a straight line in hard mode
+        const isConnected = this.boardManager.checkConnectivity(selectedHexagons);
+        
+        if (sum === this.targetNumber && !this.usedCombinations.has(selectedIds) && 
+            (!this.hardModeEnabled || isConnected)) {
             // Correct selection
             this.selectedNumbers.forEach(item => {
                 item.hexagon.style.backgroundColor = CONFIG.COLORS.CORRECT; // Green for correct
+                
+                // Add connected path highlight in hard mode
+                if (this.hardModeEnabled) {
+                    item.hexagon.classList.add('connected-path');
+                }
             });
             this.timerDisplay.textContent = 'Correct!';
             this.soundManager.playCorrectSound();
@@ -137,9 +174,16 @@ class HexagonGame {
             this.selectedNumbers.forEach(item => {
                 item.hexagon.style.backgroundColor = CONFIG.COLORS.INCORRECT; // Red for incorrect
             });
-            const message = this.usedCombinations.has(selectedIds) ? 
-                'Combination already used!' : 
-                `Wrong! Sum = ${sum}`;
+            
+            let message = '';
+            if (this.usedCombinations.has(selectedIds)) {
+                message = 'Combination already used!';
+            } else if (this.hardModeEnabled && !isConnected && sum === this.targetNumber) {
+                message = 'Hexagons must form a line!';
+            } else {
+                message = `Wrong! Sum = ${sum}`;
+            }
+            
             this.timerDisplay.textContent = message;
             this.soundManager.playWrongSound();
         }
@@ -149,12 +193,15 @@ class HexagonGame {
             this.resetSelection();
         }, CONFIG.SELECTION_RESET_DELAY);
     }
-      resetSelection() {
-        // log the selected numbers before resetting
-        console.log('Resetting selection:', this.selectedNumbers.map(item => item.number));
+    
+    resetSelection() {
         this.selectedNumbers.forEach(item => {
             item.hexagon.classList.remove('selected');
-            item.hexagon.style.backgroundColor = CONFIG.COLORS.DEFAULT;
+            item.hexagon.classList.remove('connected-path');
+            // Use the appropriate color based on the current mode
+            item.hexagon.style.backgroundColor = this.hardModeEnabled ? 
+                '#455a64' : // Dark theme hexagon color for hard mode
+                CONFIG.COLORS.DEFAULT; // Default color for normal mode
         });
         this.selectedNumbers = [];
     }

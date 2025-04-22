@@ -8,6 +8,12 @@ const CONFIG = {
     MAX_NUMBER: 5,
     SELECTION_RESET_DELAY: 1250,
     
+    // Hard mode settings
+    HARD_MODE: {
+        MAX_OCCURRENCES: 4,
+        ENABLE_CONNECTION_CHECK: true
+    },
+    
     // Colors
     COLORS: {
         DEFAULT: '#007bff',
